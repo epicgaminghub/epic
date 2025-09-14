@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Epic Gaming Hub</title>
+    <link rel="icon" href="https://cdn-icons-png.freepik.com/512/5087/5087379.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+          margin: 0;
+          font-family: 'Poppins', sans-serif;
+          text-align: center;
+          color: white;
+          background-image: url('https://i0.wp.com/backgroundabstract.com/wp-content/uploads/edd/2022/04/vecteezy_Lavender-Lilac-Background-2_ir1020__generated-e1655987350100.jpg?resize=150150&ssl=1');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          height: 100vh;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 15px;
+        }
+
+        header {
+          padding: 15px;
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 12px;
+          border: 2px solid white;
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+          margin-bottom: 0px;
+          overflow-x: auto;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        h1 {
+          font-size: 36px;
+          margin: 0 0 10px;
+          font-weight: 600;
+          width: 100%;
+        }
+
+        .search-bar {
+          margin: 10px 0;
+          padding: 10px 20px;
+          font-size: 16px;
+          border-radius: 50px;
+          border: 2px solid white;
+          width: 90%;
+          max-width: 400px;
+          background-color: rgba(255, 255, 255, 0.1);
+          color: white;
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+          transition: box-shadow 0.3s, background-color 0.3s;
+        }
+
+        .search-bar:focus {
+          outline: none;
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        button {
+          padding: 12px 25px;
+          margin: 8px;
+          font-size: 16px;
+          cursor: pointer;
+          background-color: transparent;
+          color: white;
+          border: 2px solid white;
+          border-radius: 30px;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 600;
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+          white-space: nowrap;
+          transition: background-color 0.3s, transform 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s;
+          flex-shrink: 0;
+        }
+
+        button:hover {
+          background-color: white;
+          color: #5e2a84;
+          transform: scale(1.15);
+          box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.9);
+          text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9);
+        }
+
+        .fullscreen-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          width: 100%;
+          flex-grow: 0.9;
+          margin-top: 20px;
+          border: 2px solid white;
+          border-radius: 12px;
+          box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+          height: 50%;
+        }
+
+        iframe {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          border: none;
+          border-radius: 12px;
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        .fullscreen-button {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          z-index: 1000;
+          background-color: #222;
+          color: white;
+          border: 2px solid white;
+          padding: 10px 20px;
+          border-radius: 30px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .fullscreen-button:hover {
+          background-color: #ddd;
+          color: black;
+          transform: scale(1.1);
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+        }
+
+        .loader {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 999;
+          display: none;
+          animation: rotate 1s linear infinite;
+        }
+
+        .loader::before {
+          content: "";
+          box-sizing: border-box;
+          position: absolute;
+          inset: 0px;
+          border-radius: 50%;
+          border: 5px solid #FFF;
+          animation: prixClipFix 2s linear infinite;
+        }
+
+        @keyframes rotate {
+          100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+          }
+        }
+
+        @keyframes prixClipFix {
+          0% { clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0); }
+          25% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); }
+          50% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); }
+          75% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%); }
+          100% { clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0); }
+        }
+
+        .start-message {
+          font-size: 30px;
+          color: #fff;
+          font-weight: 500;
+          animation: fadeIn 1s ease-in-out;
+          text-align: center;
+          position: absolute;
+          z-index: 999;
+        }
+    </style>
+</head>
+<body>
+<header aria-label="Game Selection Menu">
+    <h1>Epic Gaming Hub</h1>
+    <input type="text" id="searchBar" class="search-bar" placeholder="Search games..." aria-label="Search Games" oninput="filterGames()">
+    <button onclick="loadGame('https://1v1.lol/')" aria-label="Play 1v1.lol">Play 1v1.lol</button>
+    <button onclick="loadGame('https://x.mess.eu.org/ninja-js/')" aria-label="Play Eaglercraft 1.8.8">Play Eaglercraft 1.8.8</button>
+    <button onclick="loadGame('https://blobby-boi.github.io/Cookie-Clicker/')" aria-label="Play Cookie Clicker">Play Cookie Clicker</button>
+    <button onclick="loadGame('https://warbot.io/')" aria-label="Play WarBot.io">Play WarBot.io</button>
+    <button onclick="loadGame('https://slopegame.io/')" aria-label="Play Slope">Play Slope</button>
+    <button onclick="loadGame('https://mathadventure1.github.io/slope/slope/index.html')" aria-label="Play Slope (real)">Play Slope (real)</button>
+    <button onclick="loadGame('https://slither.io/')" aria-label="Play Slither.io">Play Slither.io</button>
+    <button onclick="loadGame('https://slowroads.io/')" aria-label="Play Slow Roads">Play Slow Roads</button>
+    <button onclick="loadGame('https://geometrydash-lite.io/')" aria-label="Play Geometry Dash Lite">Play Geometry Dash Lite</button>
+    <button onclick="loadGame('https://2048game.com/')" aria-label="Play 2048">Play 2048</button>
+    <button onclick="loadGame('https://www.stumbleguys.com/play')" aria-label="Play Stumble Guys">Play Stumble Guys</button>
+    <button onclick="loadGame('https://ovo-game.github.io/')" aria-label="Play OvO">Play OvO</button>
+    <button onclick="loadGame('https://retrobowlgame.io/')" aria-label="Play Retro Bowl">Play Retro Bowl</button>
+    <button onclick="loadGame('https://wordleunlimited.org/')" aria-label="Play Wordle">Play Wordle</button>
+    <button onclick="loadGame('https://lekug.github.io/tn6pS9dCf37xAhkJv/')" aria-label="Play Run 3">Play Run 3</button>
+    <button onclick="loadGame('https://keygames.com/game/fruit-ninja/')" aria-label="Play Fruit Ninja">Play Fruit Ninja</button>
+    <button onclick="loadGame('https://play.tetris.com/')" aria-label="Play Tetris">Play Tetris</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/chrome-dino/index.html')" aria-label="Play Chrome Dino">Play Chrome Dino</button>
+    <button onclick="loadGame('https://deathrun3d.io/')" aria-label="Play Death Run 3D">Play Death Run 3D</button>
+    <button onclick="loadGame('https://mountain658.github.io/g/paperio2/paperio2.html')" aria-label="Play Paper.io 2">Play Paper.io 2</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/moto-x3m/index.html')" aria-label="Play Moto X3M">Play Moto X3M</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/ages-of-conflict/index.html')" aria-label="Play Ages of Conflict">Play Ages of Conflict</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/hextris/index.html')" aria-label="Play Hextris">Play Hextris</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/pacman/index.html')" aria-label="Play Pac-Man">Play Pac-Man</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/papery-planes/index.html')" aria-label="Play Papery Planes">Play Papery Planes</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/tunnel-rush/index.html')" aria-label="Play Tunnel Rush">Play Tunnel Rush</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/flappy-bird/index.html')" aria-label="Play Flappy Bird">Play Flappy Bird</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/vex6/index.html')" aria-label="Play Vex 6">Play Vex 6</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/circlo/index.html')" aria-label="Play Circlo">Play Circlo</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/baldis-basics/index.html')" aria-label="Play Baldi's Basics">Play Baldi's Basics</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/cell-machine/index.html')" aria-label="Play Cell Machine">Play Cell Machine</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/mario/index.html')" aria-label="Play Mario">Play Mario</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/core-ball/index.html')" aria-label="Play Core Ball">Play Core Ball</button>
+    <button onclick="loadGame('https://nb-ga.github.io/games-site/projects/doodle-jump/index.html')" aria-label="Play Doodle Jump">Play Doodle Jump</button>
+    <button onclick="loadGame('https://ug17.github.io/play/Stack/index.html')" aria-label="Play Stack">Play Stack</button>
+    <button onclick="loadGame('https://ug17.github.io/play/Ball-Hop/index.html')" aria-label="Play Ball Hop">Play Ball Hop</button>
+    <button onclick="loadGame('https://ug17.github.io/play/Hacker-Tetris/index.html')" aria-label="Play Hacker Tetris">Play Hacker Tetris</button>
+    <button onclick="loadGame('https://ug17.github.io/play/Stickman-HookUB/index.html')" aria-label="Play Stickman Hook">Play Stickman Hook</button>
+    <button onclick="loadGame('https://ug17.github.io/play/Subway-Surfers/index.html')" aria-label="Play Subway Surfers">Play Subway Surfers</button>
+    <button onclick="loadGame('https://ug17.github.io/play/Doge-Miner/index.html')" aria-label="Play Doge Miner">Play Doge Miner</button>
+    <button onclick="loadGame('https://ug17.github.io/play/Crossy-Road/index.html')" aria-label="Play Crossy Road">Play Crossy Road</button>
+    <button onclick="loadGame('https://gnhustgames.github.io/dgmn2-online/')" aria-label="Play Doge Miner 2">Play Doge Miner 2</button>
+    <button onclick="loadGame('https://juststudy-ce.github.io/studyguide/pt/index.html')" aria-label="Play Polytrack">Play Polytrack</button>
+    <button onclick="loadGame('https://shellshock.io/')" aria-label="Play Shell Shocker">Play Shell Shocker</button>
+    <button onclick="loadGame('https://mountain658.github.io/g/tombofthemask/index.html')" aria-label="Play Tomb of the Mask">Play Tomb of the Mask</button>
+    <button onclick="loadGame('https://ubg365.github.io/eggy-car/play.html')" aria-label="Play Eggy Car">Play Eggy Car</button>
+    <button onclick="loadGame('https://infinite-craft.com/infinite-craft/')" aria-label="Play Infinte Craft">Play Infinite Craft</button>
+    <button onclick="loadGame('https://brutal.io/')" aria-label="Play Brutal.io">Play Brutal.io</button>
+    <button onclick="loadGame('https://juststudy-ce.github.io/studyguide/ff/')" aria-label="Play FNF">Play FNF</button>
+    <button onclick="loadGame('https://ubg77.github.io/fix/fnaf1/')" aria-label="Play FNAF (web)">Play FNAF (web)</button>
+    <button onclick="loadGame('https://doodlecricket.github.io/')" aria-label="Play Doodle Cricket">Play Doodle Cricket</button>
+      <button onclick="loadGame('https://juststudy-ce.github.io/studyguide/bdgg/index.html')" aria-label="Play Bad Egg">Play Bad Egg</button>
+      <button onclick="loadGame('https://juststudy-ce.github.io/studyguide/gsp/')" aria-label="Play Gun Spin">Play Gun Spin</button>
+      <button onclick="loadGame('https://juststudy-ce.github.io/studyguide/d-m/')" aria-label="Play Drive Mad">Play Drive Mad</button>
+      <button onclick="loadGame('https://legalizenuclearbombs5.github.io/games/Tiny%20Fishing')" aria-label="Play Tiny Fishing">Play Tiny Fishing</button>
+      <button onclick="loadGame('https://crazycattle3d.io/')" aria-label="Play Crazy Cattle 3D">Play Crazy Cattle 3D</button>
+</header>
+
+<div class="fullscreen-container" aria-label="Game Display Area">
+    <div id="startMessage" class="start-message">Click on a game to start playing!</div>
+    <span id="loadingSpinner" class="loader" role="status" aria-label="Loading"></span>
+    <iframe id="iframehtml5" title="Game display frame" src="" allowfullscreen loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+    <button class="fullscreen-button" onclick="toggleFullScreen()" aria-label="Toggle Fullscreen Mode">▣ Fullscreen</button>
+  
+</div>
+
+<script>
+    function loadGame(url) {
+      const iframe = document.getElementById('iframehtml5');
+      const spinner = document.getElementById('loadingSpinner');
+      const startMessage = document.getElementById('startMessage');
+
+      startMessage.style.display = 'none';
+      spinner.style.display = 'block';
+      iframe.style.opacity = 0.5;
+      iframe.src = url;
+
+      iframe.onload = function() {
+        spinner.style.display = 'none';
+        iframe.style.opacity = 1;
+      };
+    }
+
+    function toggleFullScreen() {
+      const iframe = document.getElementById('iframehtml5');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.mozRequestFullScreen) {
+        iframe.mozRequestFullScreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+    }
+
+    function filterGames() {
+      const query = document.getElementById('searchBar').value.toLowerCase();
+      const buttons = document.querySelectorAll('header button');
+
+      buttons.forEach(button => {
+        const label = button.textContent.toLowerCase();
+        if (label.includes(query)) {
+          button.style.display = '';
+        } else {
+          button.style.display = 'none';
+        }
+      });
+    }
+</script>
+</body>
+</html>
